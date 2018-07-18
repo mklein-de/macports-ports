@@ -1,0 +1,24 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8::et:sw=4:ts=4:sts=4
+
+PortSystem          1.0
+PortGroup           github 1.0
+PortGroup           xcode 1.0
+
+github.setup        Pyroh Fluor 1.2beta2
+categories          aqua
+platforms           darwin
+license             MIT
+maintainers         {@mklein-de} openmaintainer
+
+description         A handy tool for macOS allowing you to switch Fn keys
+long_description    ${name} is a tool that allows you to automatically change \
+    the behavior of the keyboard's fn keys depending on the active application. \
+    It's that simple.
+
+checksums           rmd160  e2b5ae776deb4322e5c46ae0669d8865ceefe0ab \
+                    sha256  79ffbc9830d33ca452a74753cd98043db704be18b9c731b87281865499db4a59 \
+                    size    3823280
+
+post-patch {
+    reinplace "s|CODE_SIGN_IDENTITY = \".*\";|CODE_SIGN_IDENTITY = \"\";|g" ${worksrcpath}/Fluor.xcodeproj/project.pbxproj
+}
